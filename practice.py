@@ -108,17 +108,18 @@ def get_sum_zero_pairs(numbers):
         [[-1, 1], [0, 0]]
     """
 
-    sums_to_10_dict = {}
+    unique_nums_list = list(set(numbers))
+
+    sums_to_10_dict = {1: None
+                       }
     sums_to_10_list = []
 
-    for num in numbers:
+    for num in unique_nums_list:
         pair = num * -1
         if num == 0:
             sums_to_10_dict[0] = 0
         elif pair in sums_to_10_dict:
             sums_to_10_dict[pair] = num
-        elif num in sums_to_10_dict:
-            continue
         else:
             sums_to_10_dict[num] = None
 
@@ -154,7 +155,23 @@ def top_chars(phrase):
 
     """
 
-    return []
+    char_count = {}
+    top_chars = []
+
+    for char in phrase:
+        if char.isalpha():
+            char_count[char] = char_count.get(char, 0) + 1
+
+    max_count = 0
+
+    for char, count in char_count.items():
+        if count > max_count:
+            max_count = count
+            top_chars = [char]
+        elif count == max_count:
+            top_chars.append(char)
+
+    return sorted(top_chars)
 
 #####################################################################
 # You can ignore everything below this.
