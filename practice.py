@@ -108,7 +108,25 @@ def get_sum_zero_pairs(numbers):
         [[-1, 1], [0, 0]]
     """
 
-    return []
+    sums_to_10_dict = {}
+    sums_to_10_list = []
+
+    for num in numbers:
+        pair = num * -1
+        if num == 0:
+            sums_to_10_dict[0] = 0
+        elif pair in sums_to_10_dict:
+            sums_to_10_dict[pair] = num
+        elif num in sums_to_10_dict:
+            continue
+        else:
+            sums_to_10_dict[num] = None
+
+    for key, value in sums_to_10_dict.items():
+        if value != None:
+            sums_to_10_list.append([key, value])
+
+    return sums_to_10_list
 
 
 def top_chars(phrase):
